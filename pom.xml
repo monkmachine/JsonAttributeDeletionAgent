@@ -1,0 +1,90 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.iwaysoftware</groupId>
+		<artifactId>iwaypom</artifactId>
+		<version>9.1.0</version>
+	</parent>
+	<groupId>com.bae.iway</groupId>
+	<artifactId>JsonAttributeDeletionAgent</artifactId>
+	<packaging>jar</packaging>
+	<name>JsonAttributeDeletionAgent</name>
+	<properties>
+		<buildNumber>1.0.0</buildNumber>
+		<iwrelease.version>9.1.0</iwrelease.version>
+		<myextension.name>JsonAttributeDeletionAgent</myextension.name>
+		<maven.compiler.parameters>true</maven.compiler.parameters>
+	</properties>
+	
+	<pluginRepositories>
+		<pluginRepository>
+			<id>iway9-plugin-releases</id>
+			<name>iway9 Release Maven Plugins Repository</name>
+			<url>https://ishare.ibi.com:8443/nexus/content/groups/public</url>
+		</pluginRepository>
+	</pluginRepositories>
+	<repositories>
+		<repository>
+			<id>iway9</id>
+			<name> iway9 Release Maven Repository </name>
+			<url>https://ishare.ibi.com:8443/nexus/content/groups/public</url>
+		</repository>
+		<repository>
+			<id>Default</id>
+			<name>All apart from Aspose</name>
+			<url>https://repo.maven.apache.org/maven2/</url>
+		</repository>
+	</repositories>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.iwaysoftware</groupId>
+			<artifactId>iwcore</artifactId>
+			<version>${iwrelease.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.iwaysoftware</groupId>
+			<artifactId>iwutil</artifactId>
+			<version>${iwrelease.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.17.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml -->
+<dependency>
+    <groupId>com.fasterxml.jackson.dataformat</groupId>
+    <artifactId>jackson-dataformat-xml</artifactId>
+    <version>2.17.2</version>
+</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
+						<manifestEntries>
+							<Built-On>${env.COMPUTERNAME} ${maven.build.timestamp}</Built-On>
+							<Implementation-Build>${buildNumber}</Implementation-Build>
+							<Extension>${myextension.name}</Extension>
+						</manifestEntries>
+						<manifestSections>
+							<manifestSection>
+								<Name>IXTEComponent</Name>
+								<manifestEntries>
+								<Agent-Classes>com.bae.iway.jsonAttributeDeletionAgent.JsonAttributeDeletionAgent</Agent-Classes></manifestEntries>
+							</manifestSection>
+						</manifestSections>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
